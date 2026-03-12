@@ -9,7 +9,7 @@ defmodule Horde.UniformDistribution do
   """
 
   def choose_node(child_spec, members) do
-    identifier = :erlang.phash2(Map.drop(child_spec, [:id]))
+    identifier = :erlang.phash2(child_spec.id)
 
     members
     |> Enum.filter(&match?(%{status: :alive}, &1))

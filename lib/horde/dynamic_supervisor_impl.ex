@@ -281,7 +281,8 @@ defmodule Horde.DynamicSupervisorImpl do
   @big_number round(:math.pow(2, 128))
 
   defp randomize_child_id(child) do
-    Map.put(child, :id, :rand.uniform(@big_number))
+    # Map.put(child, :id, :rand.uniform(@big_number))
+    child
   end
 
   defp proxy_to_node(_node_name, message, reply_to, %{proxy_operation_ttl: {reply_to, 0}} = state) do
