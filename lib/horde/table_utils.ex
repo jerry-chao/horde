@@ -2,7 +2,7 @@ defmodule Horde.TableUtils do
   @moduledoc false
 
   def new_table(name) do
-    :ets.new(name, [:set, :protected])
+    :ets.new(name, [:set, :protected, :named_table])
   end
 
   def size_of(table) do

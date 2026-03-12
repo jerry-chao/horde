@@ -48,8 +48,8 @@ defmodule Horde.DynamicSupervisorImpl do
     state =
       %__MODULE__{
         supervisor_options: options,
-        processes_by_id: new_table(:processes_by_id),
-        process_pid_to_id: new_table(:process_pid_to_id),
+        processes_by_id: new_table(:"#{name}.processes_by_id"),
+        process_pid_to_id: new_table(:"#{name}.process_pid_to_id"),
         name: name
       }
       |> Map.merge(Map.new(Keyword.take(options, [:distribution_strategy, :proxy_message_ttl])))
