@@ -19,9 +19,10 @@ defmodule Horde.UniformDistribution do
         {:error, :no_alive_nodes}
 
       members ->
+        nodes = Enum.map(Map.keys(members), fn {_name, node} -> node end)
         chosen_member =
           HashRing.new()
-          |> HashRing.add_nodes(Map.keys(members))
+          |> HashRing.add_nodes(nodes)
           |> HashRing.key_to_node(identifier)
 
         {:ok, Map.get(members, chosen_member)}
