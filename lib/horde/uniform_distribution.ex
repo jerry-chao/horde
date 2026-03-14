@@ -13,13 +13,17 @@ defmodule Horde.UniformDistribution do
 
     members
     |> Enum.filter(&match?(%{status: :alive}, &1))
-    |> Map.new(fn member -> {member.name, member} end)
+    |> Map.new(fn member ->
+      {_name, node} = member.name
+      {node, member}
+    end)
     |> case do
       members when map_size(members) == 0 ->
         {:error, :no_alive_nodes}
 
       members ->
-        nodes = Enum.map(Map.keys(members), fn {_name, node} -> node end)
+        nodes = Map.keys(members)
+
         chosen_member =
           HashRing.new()
           |> HashRing.add_nodes(nodes)
